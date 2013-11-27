@@ -114,7 +114,7 @@ void qCallback(const std_msgs::Float32MultiArray::ConstPtr& msg) {
 
 int main(int argc, char ** argv) {
 
-  ros::init(argc, argv, "rviz_display");
+  ros::init(argc, argv, "lwr_display");
   ros::NodeHandle node("~");
    
   ros::Publisher robot_pub = node.advertise<visualization_msgs::MarkerArray>( "robot_marker", 1 );

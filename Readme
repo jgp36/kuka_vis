@@ -1,0 +1,5 @@
+Ros node for visualizing the Kuka LWR in rviz
+
+Accepts a double array of the joint positions on /visualize_lwr
+
+Publishes a MarkerArray to lwr_display/robot_marker
