@@ -14,7 +14,7 @@ static visualization_msgs::MarkerArray robot_markers;
 void updatePose(double q[7]) {
 
   //Joint 1
-  Quaterniond r1(AngleAxisd(q[0],Vector3d::UnitZ()));
+  Quaterniond r1(AngleAxisd(q[0],Vector3d::UnitZ())*AngleAxisd(M_PI,Vector3d::UnitZ()));
   robot_markers.markers[1].pose.position.x = 0;
   robot_markers.markers[1].pose.position.y = 0;
   robot_markers.markers[1].pose.position.z = 0.11;
@@ -151,13 +151,14 @@ int main(int argc, char ** argv) {
   }
 
   //Base never moves
+  Quaterniond base(AngleAxisd(M_PI,Vector3d::UnitZ()));
   robot_markers.markers[0].pose.position.x = 0;
   robot_markers.markers[0].pose.position.y = 0;
   robot_markers.markers[0].pose.position.z = 0;
-  robot_markers.markers[0].pose.orientation.x = 0.0;
-  robot_markers.markers[0].pose.orientation.y = 0.0;
-  robot_markers.markers[0].pose.orientation.z = 0.0;
-  robot_markers.markers[0].pose.orientation.w = 1.0;
+  robot_markers.markers[0].pose.orientation.x = base.x();
+  robot_markers.markers[0].pose.orientation.y = base.y();
+  robot_markers.markers[0].pose.orientation.z = base.z();
+  robot_markers.markers[0].pose.orientation.w = base.w();
 
   double q[7];
   for (size_t ii(0); ii < 7; ++ii) {

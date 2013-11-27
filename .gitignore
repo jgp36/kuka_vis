@@ -2,3 +2,6 @@
 Makefile
 bin/
 build/
+CMakeCache.txt
+CMakeFiles/
+*.cmake
