@@ -170,7 +170,7 @@ int main(int argc, char ** argv) {
   tf::TransformBroadcaster br;
   tf::Transform transform;
   transform.setOrigin( tf::Vector3(0.0, 0.0, 0.0) );
-  transform.setRotation( tf::Quaternion(0.0, 0, 0) );
+  transform.setRotation( tf::Quaternion(0.0, 0.0, 0.0, 1.0) );
 
 
   ros::Rate r(30);
