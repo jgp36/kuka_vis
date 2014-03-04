@@ -114,17 +114,17 @@ void qCallback(const std_msgs::Float32MultiArray::ConstPtr& msg) {
 
 int main(int argc, char ** argv) {
 
-  char* def_in_address = "/visualize_lwr";
+  char* def_in_address = "/visualize_proxy";
   if (argc > 2) {
     def_in_address = argv[1];
   }
 
-  char* def_out_address = "robot_marker";
+  char* def_out_address = "proxy_marker";
   if (argc > 3) {
     def_out_address = argv[2];
   }
 
-  ros::init(argc, argv, "lwr_display");
+  ros::init(argc, argv, "proxy_display");
   ros::NodeHandle node("~");
 
   ros::Publisher robot_pub = node.advertise<visualization_msgs::MarkerArray>( def_out_address, 1 );
@@ -151,8 +151,8 @@ int main(int argc, char ** argv) {
     robot_markers.markers[ii].scale.x = 1.0;
     robot_markers.markers[ii].scale.y = 1.0;
     robot_markers.markers[ii].scale.z = 1.0;
-    robot_markers.markers[ii].color.a = 0.0;
-    robot_markers.markers[ii].color.r = 0.0;
+    robot_markers.markers[ii].color.a = 0.5;
+    robot_markers.markers[ii].color.r = 0.3;
     robot_markers.markers[ii].color.g = 0.0;
     robot_markers.markers[ii].color.b = 0.0;
     robot_markers.markers[ii].mesh_resource = meshes[ii];

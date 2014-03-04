@@ -21,3 +21,4 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 rosbuild_add_executable(kuka_vis src/kuka_vis.cpp)
+rosbuild_add_executable(proxy_vis src/proxy_vis.cpp)
