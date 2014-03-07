@@ -8,6 +8,7 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/kuka_vis</url>
+  <depend package="rtt"/>
   <depend package="std_msgs"/>
   <depend package="tf"/>
 
