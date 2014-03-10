@@ -37,9 +37,9 @@ if(RTNET_INCLUDE_DIR AND ${OROCOS_TARGET} STREQUAL "xenomai" )
   execute_process(COMMAND xeno-config --skin=rtdm --ldflags OUTPUT_VARIABLE XENO_LDFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${XENO_CFLAGS}")
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${XENO_LDFLAGS}")
-  rosbuild_add_executable(rt_udp_client src/rt_udp_client.cpp) # ...you may add multiple source files
-  rosbuild_add_compile_flags(rt_udp_client ${XENO_CFLAGS})
-  rosbuild_add_link_flags(rt_udp_client ${XENO_LDFLAGS})
+  orocos_component(rt_udp_client src/rt_udp_client_component.cpp) # ...you may add multiple source files
+  orocos_add_compile_flags(rt_udp_client ${XENO_CFLAGS})
+  orocos_add_link_flags(rt_udp_client ${XENO_LDFLAGS})
   find_library(XENO_native native /usr/lib/xenomai)
   find_library(XENO_rtdm rtdm /usr/lib/xenomai)
   find_library(XENO_xenomai xenomai /usr/lib/xenomai)
