@@ -11,18 +11,23 @@ int main(int argc, char ** argv) {
 
   char* def_node = "vis_udp_sever";
   char* def_out = "/visualize_lwr";
-  if (argc > 2) {
+  int m_local_port = 11111;
+  if (argc >= 2) {
     def_node = argv[1];
   }
-  if (argc == 3) {
+  if (argc >= 3) {
     def_out = argv[2];
   }
+  if (argc == 4) {
+    m_local_port = atoi(argv[3]);
+  }
 
-  int m_local_port, m_socket;
+  int m_socket;
   struct sockaddr m_remote_addr;
-  std_msgs::Float32MultiArray m_msr_data;
+  double m_msr_data[7];
+  std_msgs::Float32MultiArray out;
+  out.data.resize(7);
   socklen_t m_sock_addr_len;
-  m_local_port = 22222;
 
   ros::init(argc, argv, def_node);
   ros::NodeHandle node("~");
@@ -33,6 +38,8 @@ int main(int argc, char ** argv) {
  	close(m_socket);
   m_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
   setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR, 0, 0);
+  int sndbuf(sizeof(m_msr_data));
+  setsockopt(m_socket, SOL_SOCKET, SO_RCVBUF, &sndbuf, sizeof(sndbuf));
 
   struct sockaddr_in local_addr;
   bzero((char *) &local_addr, sizeof(local_addr));
@@ -44,14 +51,18 @@ int main(int argc, char ** argv) {
  	ROS_WARN("Binding of port failed with errno %d",errno);
   }
   
-  ros::Rate r(1000);
+  ros::Rate r(60);
   while (ros::ok()) { 
+    m_sock_addr_len = sizeof(m_remote_addr);
     int n = recvfrom(m_socket, (void*) &m_msr_data, sizeof(m_msr_data), 0,
 			(sockaddr*) &m_remote_addr, &m_sock_addr_len); 
-    robot_pub.publish(m_msr_data);
-
+    for (size_t ii(0); ii < 7; ++ii) {
+      out.data[ii] = m_msr_data[ii];
+    }
+    robot_pub.publish(out);
     ros::spinOnce();
     r.sleep();
   }
+  close(m_socket);
   ros::shutdown();
 }
