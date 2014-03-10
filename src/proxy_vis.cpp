@@ -182,7 +182,7 @@ int main(int argc, char ** argv) {
   transform.setRotation( tf::Quaternion(0.0, 0.0, 0.0, 1.0) );
 
 
-  ros::Rate r(30);
+  ros::Rate r(60);
   while (ros::ok()) { 
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "base_link"));
     robot_pub.publish(robot_markers);
