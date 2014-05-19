@@ -48,5 +48,7 @@ endif()
 
 
 rosbuild_add_executable(kuka_vis src/kuka_vis.cpp)
-rosbuild_add_executable(proxy_vis src/proxy_vis.cpp)
+rosbuild_add_executable(proxy_vis_red src/proxy_vis_red.cpp)
+rosbuild_add_executable(proxy_vis_green src/proxy_vis_green.cpp)
+rosbuild_add_executable(proxy_vis_blue src/proxy_vis_blue.cpp)
 rosbuild_add_executable(udp_server src/udp_server.cpp)
